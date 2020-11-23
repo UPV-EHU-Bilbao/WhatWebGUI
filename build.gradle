@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 repositories {
@@ -57,7 +58,7 @@ run {
         }
         jvmArgs = jvmArgs + ['--module-path', classpath.asPath,
                              '--patch-module', "$moduleName=" + files(sourceSets.main.output.resourcesDir).asPath,
-                             '--module', "$mainClassName",
+                             '--module', "$mainClassName", '--add-opens', 'javafx.graphics/javafx.css=de.jensd.fx.fontawesomefx.commons'
         ]
         classpath = files()
     }
